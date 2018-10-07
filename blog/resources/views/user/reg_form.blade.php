@@ -24,11 +24,16 @@
 
                 <div class="username">确认密码:&nbsp;&nbsp;<input class="shurukuang" type="password" name="repassword" placeholder="请确认你的密码"/><span>两次密码要输入一致哦</span></div>
                 <div class="username">手&nbsp;&nbsp;机&nbsp;&nbsp;号:&nbsp;&nbsp;<input class="shurukuang" type="text" name="tel" placeholder="请填写正确的手机号"/><span>填写下手机号吧，方便我们联系您！</span></div>
-                {{--<div class="username">--}}
-                    {{--<div class="left fl">验&nbsp;&nbsp;证&nbsp;&nbsp;码:&nbsp;&nbsp;<input class="yanzhengma" type="text" name="username" placeholder="请输入验证码"/></div>--}}
-                    {{--<div class="right fl"><img src="./image/yanzhengma.jpg"></div>--}}
-                    {{--<div class="clear"></div>--}}
-                {{--</div>--}}
+                <div class="username">
+                    <div class="left fl">验&nbsp;&nbsp;证&nbsp;&nbsp;码:&nbsp;&nbsp;<input id="captcha"  class="yanzhengma" type="captcha" name="captcha" value="{{old('captcha')}}" placeholder="请输入验证码" required>
+                        @if($errors->has('captcha'))
+                            <div class="col-md-12">
+                                <p class="text-danger text-left"><strong>{{$errors->first('captcha')}}</strong></p>
+                            </div>
+                        @endif</div>
+                    <div class="right fl"><img src="{{captcha_src()}}" style="cursor: pointer" onclick="this.src='{{captcha_src()}}'+Math.random()"></div>
+                    <div class="clear"></div>
+                </div>
             </div>
             <div class="regist_submit">
                 <input class="submit" type="submit" value="立即注册" >

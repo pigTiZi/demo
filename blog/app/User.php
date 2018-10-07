@@ -10,4 +10,5 @@ class User extends Model
     protected $table = 'user';
     //指定id
     protected $primaryKey = 'id';
+    public $timestamps = false;
 }
