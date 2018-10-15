@@ -8,25 +8,16 @@
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
+|--------------------------------------------------------------------------
 */
 
-//Route::get('/','Index\WelcomeController@index');
-//Route::get('index','Index\WelcomeController@index');
-//Route::get('add-form','Index\WelcomeController@add_form');
-//Route::post('add','Index\WelcomeController@add');
-//Route::get('del','Index\WelcomeController@del');
-//Route::get('up-form','Index\WelcomeController@up_form');
-//Route::post('up','Index\WelcomeController@up');
+Route::get('reg','Index\UserController@telephoneRegister');//手机注册表单
+Route::post('telephone_reg_in','Index\UserController@doTelephoneRegister');//手机注册处理
+Route::get('email_reg','Index\UserController@emailRegister');//邮箱注册表单
+Route::post('email_reg_in','Index\UserController@doEmailRegister');//邮箱注册处理
 
-Route::get('reg','Index\UserController@regform');
-Route::get('login','Index\UserController@loginform');
-Route::get('shopindex','Index\IndexController@index');
-Route::post('reg_in','Index\UserController@shopRegIn');
-Route::post('login_in','Index\UserController@shopLogin');
+Route::get('login','Index\UserController@login');//登录表单
+Route::post('login_in','Index\UserController@doLogin');//登录处理
 
-//Route::controller('welcome','Index\WelcomeController');
-//Route::get('index','Index\WelcomeController@index');
-//Route::get('hello',function (){
-//   return "123";
-//});
+Route::get('shopindex','Index\IndexController@index'); //商城前台页面展示
+Route::get('search_goods','Index\IndexController@searchGoods'); //商城前台页面展示

@@ -2,50 +2,85 @@
 
 namespace App\Http\Controllers\Index;
 
+use App\Jobs\SendEmail;
 use App\Service\UserService;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mews\Captcha\Captcha;
 
 class UserController extends Controller
 {
-    //注册页面
-    public function regForm()
+    //手机号注册页面
+    public function telephoneRegister()
     {
         return view('user.reg_form');
     }
 
-    //注册处理
-    public function shopRegIn()
+    // 邮箱注册页面
+    public function emailRegister()
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $repassword = $_POST['repassword'];
-        if($password!=$repassword){
-            return redirect('reg');
-        }
-        $tel = $_POST['tel'];
-        $UserService = new UserService();
-        $res = $UserService->reg($username,$password,$tel);
-        if($res){
+        return view('user.email_form');
+    }
+
+    //手机号注册处理
+    public function doTelephoneRegister(Request $request)
+    {
+        $data = $request->validate([
+            'username' => 'required|unique:user',
+            'password' => 'required|alpha_num',
+            'repassword'=>'required|same:password',
+            'tel'=>'required|digits:11|unique:user',
+            'captcha'=>'required|captcha'
+        ]);
+        $data['password'] = md5($data['password']);
+        unset($data['repassword']);
+        unset($data['captcha']);
+        $userService = new UserService();
+        $result = $userService->doTelephoneRegister($data);
+        if($result){
             return redirect('login');
         }
     }
 
-    public function loginForm()
+    //邮箱注册处理
+    public function doEmailRegister(Request $request)
+    {
+        $data = $request->validate([
+            'username' => 'required|unique:user',
+            'password' => 'required|alpha_num',
+            'repassword'=>'required|same:password',
+            'email'=>'required|email|unique:user',
+            'captcha'=>'required|captcha'
+        ]);
+        $data['password'] = md5($data['password']);
+        unset($data['repassword']);
+        unset($data['captcha']);
+        $userService = new UserService();
+        $result = $userService->doEmailRegister($data);
+        if($result){
+            return redirect('login');
+        }
+    }
+
+    //登录表单
+    public function login()
     {
         return view('user.login_form');
     }
 
-    public function shopLogin()
+    //登录处理
+    public function doLogin(Request $request)
     {
-        $username = $_POST['username'];
-//        dd($username);die;
-        $password = $_POST['password'];
-        $UserService = new UserService();
-        $res = $UserService->login($username,$password);
-        if($res){
+        $data = $request->validate([
+            'captcha'=>'required|captcha'
+        ]);
+        $accountNumber = $request['accountNumber'];
+        $password = md5($request['password']);
+        $userService = new UserService();
+        $result = $userService->doLogin($accountNumber,$password);
+//        dd($result);
+        if($result){
+            $username = session(['username'=>$result]);
             return redirect('shopindex');
         }else{
             return redirect('login');
