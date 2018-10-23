@@ -95,13 +95,13 @@
         <ul>
             @foreach ($data as $val)
             <li>
-                <a href="">{{$val['classify_name']}}</a>
+                <a href="classifyLists?classify_id={{$val['classify_id']}}&show_status={{$val['show_status']}}">{{$val['classify_name']}}</a>
                 <div class="pop">
                     @foreach ($val['children'] as $v)
                     <div class="left fl" style="height: 80px;">
                         <div>
                             <div class="xuangou_left fl">
-                                <a href="">
+                                <a href="classifyLists?{{$v['show_status']}}">
                                     <div class="img fl"><img src="{{$v['classify_image']}}" alt=""></div>
                                     <span class="fl">{{$v['classify_name']}}</span>
                                     <div class="clear"></div>

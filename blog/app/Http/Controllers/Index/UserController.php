@@ -38,7 +38,7 @@ class UserController extends Controller
         $userService = new UserService();
         $result = $userService->doTelephoneRegister($data);
         if($result){
-            return redirect('login');
+            return redirect('/');
         }
     }
 
