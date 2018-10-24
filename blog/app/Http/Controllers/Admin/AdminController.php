@@ -7,7 +7,7 @@
  */
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\service\AdminManageService;
+use App\Service\AdminManageService;
 use App\Service\AdminService;
 use App\Service\GoodsService;
 use App\Service\MenuService;

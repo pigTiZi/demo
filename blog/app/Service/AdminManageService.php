@@ -1,5 +1,5 @@
 <?php
-namespace App\service;
+namespace App\Service;
 use App\Http\models\Admin;
 use App\Http\models\admin_role;
 use App\Http\models\Role;
