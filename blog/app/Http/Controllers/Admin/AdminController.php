@@ -82,7 +82,6 @@ class AdminController extends Controller
             'admin_password' => 'required',
             'admin_email'=>'required|email|unique:admin',
             'admin_mobile'=>'required|unique:admin',
-            'is_super'=>'required'
         ]);
 
         $data['admin_password'] = md5($data['admin_password']);
