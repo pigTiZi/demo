@@ -199,5 +199,6 @@ class AdminController extends Controller
     public function goodsList()
     {
         $goods = new GoodsService();
+//        $goodsDatas = $goods->
     }
 }
