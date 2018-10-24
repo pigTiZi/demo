@@ -83,7 +83,7 @@ class AdminController extends Controller
             'admin_email'=>'required|email|unique:admin',
             'admin_mobile'=>'required|unique:admin',
         ]);
-
+        $data['is_super'] = $request['is_super'];
         $data['admin_password'] = md5($data['admin_password']);
         $role_id =$request['role_id'];
         $admin = new AdminManageService();
