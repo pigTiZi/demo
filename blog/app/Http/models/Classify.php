@@ -15,14 +15,17 @@ class Classify extends Model
     //前台菜单展示
     public function classifyAll()
     {
-        $menuDatas = $this->all()->toArray();
+        $menuDatas = $this->where(['show_status'=>1])->get()->toArray();
         return $menuDatas;
     }
 
-    //商品搜索
-    public function searchGoods($like)
+    public function classifyAdd($data)
     {
-        $datas = $this->where('classify_name','like','%'.$like.'%')->get()->toArray();
-        return $datas;
+        foreach ($data as $key=>$val)
+        {
+            $this->$key = $val;
+        }
+        $result = $this->save();
+        return $result;
     }
 }

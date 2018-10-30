@@ -19,7 +19,7 @@ class IndexController extends Controller
         $data = Redis::get('menuDatas');
         if($data){
             $menuDatas = json_decode($data,TRUE);
-//            Redis::del('menuDatas');
+            Redis::del('menuDatas');
             return view('index.index',['data'=>$menuDatas,'username'=>$username]);
         }else{
             $indexService = new IndexService();

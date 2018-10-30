@@ -46,4 +46,16 @@ Route::group(['middleware' => ['isLogin']], function () {
     Route::get('admin/roleDel','Admin\AdminController@roleDel'); //角色删除
     Route::get('admin/resourceAdd','Admin\AdminController@resourceAdd'); //分配权限
     Route::post('admin/doResourceAdd','Admin\AdminController@doResourceAdd'); //分配权限
+
+    Route::get('admin/classifyList','Admin\ClassifyController@classifyList'); //分类列表
+    Route::get('admin/classifyAdd','Admin\ClassifyController@classifyAdd'); //分类添加
+    Route::post('admin/doClassifyAdd','Admin\ClassifyController@doClassifyAdd'); //分类添加处理
+
+    Route::get('admin/attrList','Admin\AttrController@attrList');  //属性展示
+    Route::get('admin/attrAdd','Admin\AttrController@attrAdd');  //属性添加
+    Route::post('admin/doAttrAdd','Admin\AttrController@doAttrAdd');  //属性添加处理
+
+    Route::get('admin/attrValueList','Admin\AttrValueController@attrValueList');  //属性值展示
+    Route::get('admin/attrValueAdd','Admin\AttrValueController@attrValueAdd');  //属性值添加
+    Route::post('admin/doAttrValueAdd','Admin\AttrValueController@doAttrValueAdd');  //属性添加处理
 });
